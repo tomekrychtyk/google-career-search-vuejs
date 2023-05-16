@@ -3,13 +3,7 @@ import MainNav from "@/components/MainNav.vue"
 
 describe("MainNav", () => {
   it("displays company name", () => {
-    render(MainNav, {
-      data() {
-        return {
-          company: "super corp"
-        }
-      }
-    })
+    render(MainNav)
 
     const companyName = screen.getByText(/mkoo careers/i)
 
