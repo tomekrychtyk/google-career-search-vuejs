@@ -10,20 +10,36 @@
             </li>
           </ul>
         </nav>
-        <h2 class="ml-8 flex h-full items-center">Developed by Tomek Rychtyk</h2>
+        <div class="ml-auto flex h-full items-center">
+          <ProfileImage v-if="isLoggedIn" />
+          <ActionButton v-else @click="loginUser" />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "./ActionButton.vue"
+import ProfileImage from "./ProfileImage.vue"
 export default {
   name: "MainNav",
+  components: {
+    ActionButton,
+    ProfileImage,
+    ProfileImage
+  },
   data() {
     return {
       company: "Mkoo Careers",
       url: "https://careers.google.com",
-      menuItems: ["Teams", "Locations", "Life at Mkoo Corp", "How we hire?", "Students", "Jobs"]
+      menuItems: ["Teams", "Locations", "Life at Mkoo Corp", "How we hire?", "Students", "Jobs"],
+      isLoggedIn: false
+    }
+  },
+  methods: {
+    loginUser() {
+      this.isLoggedIn = true
     }
   }
 }
