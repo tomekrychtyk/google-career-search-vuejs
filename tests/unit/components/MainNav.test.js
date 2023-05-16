@@ -7,7 +7,6 @@ describe("MainNav", () => {
     render(MainNav)
 
     const companyName = screen.getByText(/mkoo careers/i)
-
     expect(companyName).toBeInTheDocument()
   })
 
