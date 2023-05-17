@@ -32,7 +32,7 @@ describe("SubNav", () => {
         },
         data() {
           return {
-            onJobResultPage: false
+            onJobResultsPage: false
           }
         }
       })
