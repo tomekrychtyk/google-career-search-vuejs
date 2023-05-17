@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/vue"
 import userEvent from "@testing-library/user-event"
-import MainNav from "@/components/MainNav.vue"
+import MainNav from "@/components/Navigation/MainNav.vue"
 
 describe("MainNav", () => {
   const renderMainNav = () => {
