@@ -10,6 +10,9 @@
 <script>
 export default {
   name: "TextInput",
+  // emits: {
+  //   'handleInput': String
+  // },
   data() {
     return {
       value: ""
@@ -18,6 +21,7 @@ export default {
   methods: {
     handleInput($event) {
       this.value = $event.target.value
+      this.$emit("handleInput", this.value)
     }
   }
 }
