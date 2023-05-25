@@ -3,17 +3,25 @@ import { RouterLinkStub } from "@vue/test-utils"
 import userEvent from "@testing-library/user-event"
 import MainNav from "@/components/Navigation/MainNav.vue"
 
-describe("MainNav", () => {
-  const renderMainNav = () => {
-    render(MainNav, {
-      global: {
-        stubs: {
-          FontAwesomeIcon: true,
-          RouterLink: RouterLinkStub
-        }
-      }
-    })
+const renderMainNav = () => {
+  const $route = {
+    name: "Home"
   }
+
+  render(MainNav, {
+    global: {
+      stubs: {
+        FontAwesomeIcon: true,
+        RouterLink: RouterLinkStub
+      }
+    },
+    mocks: {
+      $route
+    }
+  })
+}
+
+describe("MainNav", () => {
   it("displays company name", () => {
     renderMainNav()
     const companyName = screen.getByText(/mkoo careers/i)
@@ -35,9 +43,7 @@ describe("MainNav", () => {
       "Students",
       "Jobs"
     ])
-  })
 
-  describe("when the user logs in", () => {
     it("displays user profile picture", async () => {
       renderMainNav()
 

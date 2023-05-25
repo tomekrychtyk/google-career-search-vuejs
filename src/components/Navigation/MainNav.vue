@@ -48,7 +48,7 @@ export default {
           url: "/"
         },
         {
-          text: "Life at Mkoo Company",
+          text: "Life at Mkoo Corp",
           url: "/"
         },
         {
