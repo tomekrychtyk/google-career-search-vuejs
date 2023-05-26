@@ -1,5 +1,5 @@
 <template>
-  <main class="flex-auto bg-brand-grey-2 p-8">
+  <main class="bg-brand-gray-2 flex-auto p-8">
     <ol>
       <job-listing v-for="job in jobs" :key="job.id" :job="job" />
     </ol>
@@ -8,13 +8,12 @@
 
 <script>
 import axios from "axios"
+
 import JobListing from "@/components/JobResults/JobListing.vue"
 
 export default {
   name: "JobListings",
-  components: {
-    JobListing
-  },
+  components: { JobListing },
   data() {
     return {
       jobs: []
