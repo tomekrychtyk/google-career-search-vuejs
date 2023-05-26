@@ -41,4 +41,26 @@ describe("JobListings", () => {
     const jobListings = await screen.findAllByRole("listitem")
     expect(jobListings).toHaveLength(10)
   })
+
+  describe("when params exclude page number", () => {
+    it("displays page number 1", () => {
+      const queryParams = { page: undefined }
+      const $route = createRoute(queryParams)
+
+      renderJobListings($route)
+
+      expect(screen.getByText("Page 1")).toBeInTheDocument()
+    })
+  })
+
+  describe("when params include page number", () => {
+    it("displays page number", () => {
+      const queryParams = { page: "3" }
+      const $route = createRoute(queryParams)
+
+      renderJobListings($route)
+
+      expect(screen.getByText("Page 3")).toBeInTheDocument()
+    })
+  })
 })

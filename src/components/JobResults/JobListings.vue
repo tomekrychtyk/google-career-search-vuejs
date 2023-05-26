@@ -53,7 +53,7 @@ export default {
       return nextPage <= lastPage ? nextPage : undefined
     },
     currentPage() {
-      return Number.parseInt(this.$route.query.page)
+      return Number.parseInt(this.$route.query.page || 1)
     },
     displayedJobs() {
       const pageNumber = this.currentPage
