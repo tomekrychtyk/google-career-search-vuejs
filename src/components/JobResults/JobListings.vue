@@ -9,6 +9,7 @@
         <div class="flex items-center justify-center">
           <router-link
             v-if="previousPage"
+            role="link"
             :to="{ name: 'JobResults', query: { page: previousPage } }"
             class="mx-3 text-sm font-semibold text-brand-blue-1"
             >Previous</router-link
@@ -16,6 +17,7 @@
 
           <router-link
             v-if="nextPage"
+            role="link"
             :to="{ name: 'JobResults', query: { page: nextPage } }"
             class="mx-3 text-sm font-semibold text-brand-blue-1"
             >Next</router-link
@@ -48,7 +50,7 @@ export default {
     },
     nextPage() {
       const nextPage = this.currentPage + 1
-      const lastPage = this.jobs.length / 10
+      const lastPage = Math.ceil(this.jobs.length / 10)
 
       return nextPage <= lastPage ? nextPage : undefined
     },
