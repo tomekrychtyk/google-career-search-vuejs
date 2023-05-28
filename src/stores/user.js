@@ -5,5 +5,11 @@ export const useUserStroe = defineStore("user", {
     return {
       isLoggedIn: false
     }
+  },
+
+  actions: {
+    loginUser() {
+      this.isLoggedIn = true
+    }
   }
 })
