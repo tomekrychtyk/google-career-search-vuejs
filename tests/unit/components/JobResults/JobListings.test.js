@@ -30,9 +30,10 @@ describe("JobListings", () => {
   }
 
   it("fetches jobs", () => {
+    const baseUrl = import.meta.env.VITE_APP_API_URL
     axios.get.mockResolvedValue({ data: [] })
     renderJobListings(createRoute())
-    expect(axios.get).toHaveBeenCalledWith("http://localhost:3000/jobs")
+    expect(axios.get).toHaveBeenCalledWith(`${baseUrl}/jobs`)
   })
 
   it("maximum of 10 jobs", async () => {
