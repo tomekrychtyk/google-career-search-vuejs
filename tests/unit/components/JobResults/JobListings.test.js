@@ -109,7 +109,6 @@ describe("JobListings", () => {
 
   describe("when user is on last page", () => {
     it("shows link to the previous page", async () => {
-      // axios.get.mockResolvedValue({ data: Array(15).fill({}) })
       const queryParams = { page: "2" }
       const $route = createRoute(queryParams)
 
@@ -126,7 +125,6 @@ describe("JobListings", () => {
     })
 
     it("does not show link to next page", async () => {
-      // axios.get.mockResolvedValue({ data: Array(15).fill({}) })
       const queryParams = { page: "2" }
       const $route = createRoute(queryParams)
 
