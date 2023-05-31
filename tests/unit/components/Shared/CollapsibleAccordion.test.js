@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event"
 import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue"
 
 describe("CollapsibleAccordion", () => {
-  it("renders child content", async () => {
+  const renderCollapsibleAccordion = (config = {}) => {
     render(CollapsibleAccordion, {
       global: {
         stubs: {
@@ -13,6 +13,18 @@ describe("CollapsibleAccordion", () => {
       },
       props: {
         header: "My Category"
+      },
+      slots: {
+        default: "<h3>My nested child</h3>"
+      },
+      ...config
+    })
+  }
+
+  it("renders child content", async () => {
+    renderCollapsibleAccordion({
+      props: {
+        header: "My category"
       },
       slots: {
         default: "<h3>My nested child</h3>"
@@ -29,15 +41,11 @@ describe("CollapsibleAccordion", () => {
 
   describe("when parent does not provide custom child content", () => {
     it("renders child content", async () => {
-      render(CollapsibleAccordion, {
-        global: {
-          stubs: {
-            FontAwesomeIcon: true
-          }
-        },
+      renderCollapsibleAccordion({
         props: {
-          header: "My Category"
-        }
+          header: "My category"
+        },
+        slots: {}
       })
 
       const button = screen.getByRole("button", {
