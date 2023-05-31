@@ -8,12 +8,12 @@
         </div>
       </div>
 
+      <collapsible-accordion header="Degree" />
       <collapsible-accordion header="Job types">
         <div class="mt-5">
           <p>Placeholder for now</p>
         </div>
       </collapsible-accordion>
-
       <collapsible-accordion header="Organizations">
         <div class="mt-5">
           <fieldset>
