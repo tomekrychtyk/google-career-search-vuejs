@@ -16,6 +16,11 @@ describe("state", () => {
     const store = useUserStore()
     expect(store.selectedOrganizations).toEqual([])
   })
+
+  test("keeps track of the selected job types", () => {
+    const store = useUserStore()
+    expect(store.selectedJobTypes).toEqual([])
+  })
 })
 
 describe("actions", () => {
@@ -38,6 +43,15 @@ describe("actions", () => {
       store.ADD_SELECTED_ORGANIZATIONS(["Org 1", "Org 2"])
 
       expect(store.selectedOrganizations).toEqual(["Org 1", "Org 2"])
+    })
+  })
+
+  describe("ADD_SELECTED_JOB_TYPES", () => {
+    test("updated selectedJobTypes the user have chosen to filter by", () => {
+      const store = useUserStore()
+      store.ADD_SELECTED_JOB_TYPES(["Fulltime", "Part time"])
+
+      expect(store.selectedJobTypes).toEqual(["Fulltime", "Part time"])
     })
   })
 })
