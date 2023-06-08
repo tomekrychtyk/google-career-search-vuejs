@@ -11,6 +11,11 @@ describe("state", () => {
     const store = useUserStore()
     expect(store.isLoggedIn).toBe(false)
   })
+
+  test("keeps track of the selected organizations", () => {
+    const store = useUserStore()
+    expect(store.selectedOrganizations).toEqual([])
+  })
 })
 
 describe("actions", () => {
@@ -24,6 +29,15 @@ describe("actions", () => {
       store.loginUser()
 
       expect(store.isLoggedIn).toBe(true)
+    })
+  })
+
+  describe("ADD_SELECTED_ORGANIZATIONS", () => {
+    test("updates organizations the user have chosen to filter to jobs by", () => {
+      const store = useUserStore()
+      store.ADD_SELECTED_ORGANIZATIONS(["Org 1", "Org 2"])
+
+      expect(store.selectedOrganizations).toEqual(["Org 1", "Org 2"])
     })
   })
 })
