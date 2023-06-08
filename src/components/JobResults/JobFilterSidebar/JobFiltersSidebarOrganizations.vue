@@ -5,14 +5,14 @@
         <ul class="flex flex-row flex-wrap">
           <li v-for="organization in UNIQUE_ORGANIZATIONS" :key="organization" class="h-8 w-1/2">
             <input
-              id="VueTube"
+              :id="organization"
               v-model="selectedOrganizations"
               :value="organization"
               type="checkbox"
               class="mr-3"
               @change="selectOrganization"
             />
-            <label for="VueTube">{{ organization }}</label>
+            <label :for="organization">{{ organization }}</label>
           </li>
         </ul>
       </fieldset>

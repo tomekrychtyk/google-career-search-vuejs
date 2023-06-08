@@ -4,12 +4,13 @@ import { createTestingPinia } from "@pinia/testing"
 
 import JobsFiltersSidebarOrganizations from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarOrganizations.vue"
 import { useJobsStore } from "@/stores/jobs"
+import { useUserStore } from "@/stores/user"
 
 describe("JobsFiltersSidebarOrganizations", () => {
-  it("renders unique list of organizations", async () => {
+  const renderJobsFiltersSidebarOrganizations = () => {
     const pinia = createTestingPinia()
+    const userStore = useUserStore()
     const jobsStore = useJobsStore()
-    jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Facebook", "Google"])
 
     render(JobsFiltersSidebarOrganizations, {
       global: {
@@ -20,10 +21,16 @@ describe("JobsFiltersSidebarOrganizations", () => {
       }
     })
 
+    return { userStore, jobsStore }
+  }
+
+  it("renders unique list of organizations", async () => {
+    const { jobsStore } = renderJobsFiltersSidebarOrganizations()
+    jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Facebook", "Google"])
+
     const button = screen.getByRole("button", {
       name: /organizations/i
     })
-
     await userEvent.click(button)
 
     const organizationListItems = screen.getAllByRole("listitem")
@@ -32,5 +39,23 @@ describe("JobsFiltersSidebarOrganizations", () => {
     })
 
     expect(organizations).toEqual(["Facebook", "Google"])
+  })
+
+  it("communicated that user has selected checkbox for organization", async () => {
+    const { userStore, jobsStore } = renderJobsFiltersSidebarOrganizations()
+    jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Facebook", "Google"])
+
+    const button = screen.getByRole("button", {
+      name: /organizations/i
+    })
+    await userEvent.click(button)
+
+    const googleCheckbox = screen.getByRole("checkbox", {
+      name: /google/i
+    })
+
+    await userEvent.click(googleCheckbox)
+
+    expect(userStore.ADD_SELECTED_ORGANIZATIONS).toHaveBeenCalledWith(["Google"])
   })
 })
