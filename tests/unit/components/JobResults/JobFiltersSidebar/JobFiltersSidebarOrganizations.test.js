@@ -1,10 +1,13 @@
 import { render, screen } from "@testing-library/vue"
 import userEvent from "@testing-library/user-event"
 import { createTestingPinia } from "@pinia/testing"
+import { useRouter } from "vue-router"
 
 import JobsFiltersSidebarOrganizations from "@/components/JobResults/JobFilterSidebar/JobFiltersSidebarOrganizations.vue"
 import { useJobsStore } from "@/stores/jobs"
 import { useUserStore } from "@/stores/user"
+
+vi.mock("vue-router")
 
 describe("JobsFiltersSidebarOrganizations", () => {
   const renderJobsFiltersSidebarOrganizations = () => {
@@ -49,6 +52,9 @@ describe("JobsFiltersSidebarOrganizations", () => {
 
   describe("when user clicks checkbox", () => {
     it("communicated that user has selected checkbox for organization", async () => {
+      useRouter.mockReturnValue({
+        push: vi.fn()
+      })
       const { userStore, jobsStore } = renderJobsFiltersSidebarOrganizations()
       jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Facebook", "Google"])
 
@@ -67,7 +73,9 @@ describe("JobsFiltersSidebarOrganizations", () => {
     })
 
     it("navigates users to job results page to see fresh batch of job results", async () => {
-      const { jobsStore, $router } = renderJobsFiltersSidebarOrganizations()
+      const push = vi.fn()
+      useRouter.mockReturnValue({ push })
+      const { jobsStore } = renderJobsFiltersSidebarOrganizations()
       jobsStore.UNIQUE_ORGANIZATIONS = new Set(["Google"])
 
       const button = screen.getByRole("button", {
@@ -81,7 +89,7 @@ describe("JobsFiltersSidebarOrganizations", () => {
 
       await userEvent.click(googleCheckbox)
 
-      expect($router.push).toHaveBeenCalledWith({
+      expect(push).toHaveBeenCalledWith({
         name: "JobResults"
       })
     })
