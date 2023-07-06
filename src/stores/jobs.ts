@@ -31,7 +31,7 @@ export const useJobsStore = defineStore("jobs", {
 
   getters: {
     [UNIQUE_ORGANIZATIONS](state) {
-      const uniqueOrgnanizations = new Set()
+      const uniqueOrgnanizations = new Set<string>()
       state.jobs.forEach((job) => {
         uniqueOrgnanizations.add(job.organization)
       })
@@ -39,7 +39,7 @@ export const useJobsStore = defineStore("jobs", {
     },
 
     [UNIQUE_JOB_TYPES](state) {
-      const uniqueJobTypes = new Set()
+      const uniqueJobTypes = new Set<string>()
       state.jobs.forEach((job) => {
         uniqueJobTypes.add(job.jobType)
       })
