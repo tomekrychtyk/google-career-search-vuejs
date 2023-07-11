@@ -5,6 +5,7 @@ import axios from "axios"
 import { useJobsStore, FETCH_JOBS } from "@/stores/jobs"
 import { useUserStore } from "@/stores/user"
 import { Job } from "@/api/types"
+import createJob from "../../utils/createJob"
 
 vi.mock("axios")
 
@@ -38,22 +39,6 @@ describe("actions", () => {
 })
 
 describe("getters", () => {
-  const createJob = (job: Partial<Job> = {}): Job => {
-    return {
-      id: 1,
-      title: "Angular Developer",
-      organization: "Vue and Me",
-      degree: "Master's",
-      jobType: "Intern",
-      locations: ["Lisbon"],
-      minimumQualifications: ["Embrace sticky infrastructures"],
-      preferredQualifications: ["Envisioneer b2b web services"],
-      description: ["Away someone forget effect wait land."],
-      dateAdded: "2021-07-04",
-      ...job
-    }
-  }
-
   beforeEach(() => {
     setActivePinia(createPinia())
   })

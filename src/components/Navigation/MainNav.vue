@@ -16,7 +16,7 @@
         </nav>
         <div class="ml-auto flex h-full items-center">
           <ProfileImage v-if="isLoggedIn" />
-          <ActionButton v-else text="Sign in" @click="loginUser" />
+          <ActionButton v-else text="Sign in" @click="userStore.loginUser" />
         </div>
       </div>
       <SubNav v-if="isLoggedIn" />
@@ -24,61 +24,46 @@
   </header>
 </template>
 
-<script>
-import { mapActions, mapState } from "pinia"
+<script lang="ts" setup>
+import { ref, computed } from "vue"
 import { useUserStore } from "@/stores/user"
 import ActionButton from "@/components/Shared/ActionButton.vue"
 import ProfileImage from "./ProfileImage.vue"
 import SubNav from "./SubNav.vue"
 
-export default {
-  name: "MainNav",
-  components: {
-    ActionButton,
-    ProfileImage,
-    SubNav
+const menuItems = ref([
+  {
+    text: "Teams",
+    url: "/teams"
   },
-  data() {
-    return {
-      menuItems: [
-        {
-          text: "Teams",
-          url: "/teams"
-        },
-        {
-          text: "Locations",
-          url: "/"
-        },
-        {
-          text: "Life at Mkoo Corp",
-          url: "/"
-        },
-        {
-          text: "How we hire?",
-          url: "/"
-        },
-        {
-          text: "Students",
-          url: "/"
-        },
-        {
-          text: "Jobs",
-          url: "/jobs/results"
-        }
-      ]
-    }
+  {
+    text: "Locations",
+    url: "/"
   },
-  computed: {
-    ...mapState(useUserStore, ["isLoggedIn"]),
-    headerHeightClass() {
-      return {
-        "h-16": !this.isLoggedIn,
-        "h-32": this.isLoggedIn
-      }
-    }
+  {
+    text: "Life at Mkoo Corp",
+    url: "/"
   },
-  methods: {
-    ...mapActions(useUserStore, ["loginUser"])
+  {
+    text: "How we hire?",
+    url: "/"
+  },
+  {
+    text: "Students",
+    url: "/"
+  },
+  {
+    text: "Jobs",
+    url: "/jobs/results"
   }
-}
+])
+
+const userStore = useUserStore()
+const isLoggedIn = computed(() => userStore.isLoggedIn)
+const headerHeightClass = computed(() => {
+  return {
+    "h-16": !isLoggedIn.value,
+    "h-32": isLoggedIn.value
+  }
+})
 </script>

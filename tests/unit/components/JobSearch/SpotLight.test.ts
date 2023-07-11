@@ -1,3 +1,4 @@
+import { Mock } from "vitest"
 import { render, screen } from "@testing-library/vue"
 import axios from "axios"
 
@@ -7,7 +8,7 @@ vi.mock("axios")
 
 describe("SpotLight", () => {
   const mockSpotlightsResponse = (spotlight = {}) => {
-    axios.get.mockResolvedValue({
+    ;(axios.get as Mock).mockResolvedValue({
       data: [
         {
           img: "image.jpg",
