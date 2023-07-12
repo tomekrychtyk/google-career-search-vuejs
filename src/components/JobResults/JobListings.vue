@@ -34,10 +34,12 @@ import { useRoute } from "vue-router"
 
 import usePreviousAndNextPages from "@/composables/usePreviousAndNextPages"
 import { useJobsStore } from "@/stores/jobs"
+import { useDegreesStore } from "@/stores/degrees"
 import JobListing from "@/components/JobResults/JobListing.vue"
 
 const route = useRoute()
 const jobsStore = useJobsStore()
+const degreesStore = useDegreesStore()
 
 const FILTERED_JOBS = computed(() => jobsStore.FILTERED_JOBS)
 const maxPage = computed(() => Math.ceil(FILTERED_JOBS.value.length / 10))
@@ -58,5 +60,6 @@ const displayedJobs = computed(() => {
 
 onMounted(async () => {
   await jobsStore.FETCH_JOBS()
+  await degreesStore.FETCH_DEGREES()
 })
 </script>
