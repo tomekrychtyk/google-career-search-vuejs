@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/vue"
 import userEvent from "@testing-library/user-event"
 import { useRouter } from "vue-router"
+import { Mock } from "vitest"
 
 import JobSearchForm from "@/components/JobSearch/JobSearchForm.vue"
 
@@ -10,7 +11,7 @@ describe("JobSearch", () => {
   describe("when user submits the form ", () => {
     it("directs user job results page with users search params", async () => {
       const push = vi.fn()
-      useRouter.mockReturnValue({
+      ;(useRouter as Mock).mockReturnValue({
         push
       })
 
