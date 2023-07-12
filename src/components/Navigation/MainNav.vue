@@ -16,7 +16,7 @@
         </nav>
         <div class="ml-auto flex h-full items-center">
           <ProfileImage v-if="isLoggedIn" />
-          <ActionButton v-else text="Sign in" @click="userStore.loginUser" />
+          <ActionButton v-else text="Sign in" @click="userStore.LOGIN_USER" />
         </div>
       </div>
       <SubNav v-if="isLoggedIn" />
